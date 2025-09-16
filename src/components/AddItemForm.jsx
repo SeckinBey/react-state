@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-export default function AddItemForm() {
-  const [name, setName] = useState("temp");
+export default function AddItemForm({ onAddItem }) {
+  const [name, setName] = useState("");
 
   function handleFormSubmit(e) {
     e.preventDefault();
@@ -11,7 +11,7 @@ export default function AddItemForm() {
       completed: false,
     };
 
-    console.log(item);
+    onAddItem(item);
     setName("");
   }
 

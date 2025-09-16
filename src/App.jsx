@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
 import "./index.css";
+import { useState } from "react";
 import Header from "./components/Header";
 import AddItemForm from "./components/AddItemForm";
 import NoItem from "./components/NoItem";
@@ -17,12 +18,18 @@ const products = [
 ];
 
 export default function App() {
+  const [items, setItems] = useState(products);
+
+  function handleAddItem(item) {
+    setItems((items) => [...items, item]);
+  }
+
   return (
     <div className="container">
       <Header />
-      <AddItemForm />
+      <AddItemForm onAddItem={handleAddItem} />
       <FilterButtons />
-      <ListItems products={products} />
+      <ListItems items={items} />
       <ClearButton />
     </div>
   );
