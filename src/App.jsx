@@ -19,9 +19,11 @@ const products = [
 
 export default function App() {
   const [items, setItems] = useState(products);
+  const [filterButton, setFilterbutton] = useState("all");
 
   function handleAddItem(item) {
     setItems((items) => [...items, item]);
+    setFilterbutton("all");
   }
 
   function handleDeleteItem(id) {
@@ -40,11 +42,15 @@ export default function App() {
     <div className="container">
       <Header />
       <AddItemForm onAddItem={handleAddItem} />
-      <FilterButtons />
+      <FilterButtons
+        filterButton={filterButton}
+        setFilterbutton={setFilterbutton}
+      />
       <ListItems
         items={items}
         onDeleteItem={handleDeleteItem}
         onUpdateItem={handleUpdateItem}
+        filterButton={filterButton}
       />
       <ClearButton />
     </div>
