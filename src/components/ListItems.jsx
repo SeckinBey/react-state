@@ -1,12 +1,17 @@
-import Item from "./Items";
+import Item from "./Item";
 import NoItem from "./NoItem";
 
-export default function ListItems({ items, onDeleteItem }) {
+export default function ListItems({ items, onDeleteItem, onUpdateItem }) {
   return (
     <ul className="shopping-list list-unstyled">
       {items.length > 0 ? (
         items.map((i, index) => (
-          <Item product={i} key={index} onDeleteItem={onDeleteItem} />
+          <Item
+            product={i}
+            key={index}
+            onDeleteItem={onDeleteItem}
+            onUpdateItem={onUpdateItem}
+          />
         ))
       ) : (
         <NoItem />
