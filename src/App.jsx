@@ -4,10 +4,8 @@ import "./index.css";
 import { useState } from "react";
 import Header from "./components/Header";
 import AddItemForm from "./components/AddItemForm";
-import NoItem from "./components/NoItem";
 import FilterButtons from "./components/FilterButtons";
 import ListItems from "./components/ListItems";
-import ClearButton from "./components/ClearButton";
 
 const products = [
   { id: 1, name: "Yumurta", completed: false },
@@ -38,21 +36,29 @@ export default function App() {
     setItems(updateItems);
   }
 
+  function handleClearItems() {
+    setItems([]);
+  }
+
   return (
     <div className="container">
       <Header />
       <AddItemForm onAddItem={handleAddItem} />
-      <FilterButtons
-        filterButton={filterButton}
-        setFilterbutton={setFilterbutton}
-      />
+
+      {items.length > 0 && (
+        <FilterButtons
+          filterButton={filterButton}
+          setFilterbutton={setFilterbutton}
+          onClearItems={handleClearItems}
+        />
+      )}
+
       <ListItems
         items={items}
         onDeleteItem={handleDeleteItem}
         onUpdateItem={handleUpdateItem}
         filterButton={filterButton}
       />
-      <ClearButton />
     </div>
   );
 }
